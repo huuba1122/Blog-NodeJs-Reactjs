@@ -1,0 +1,39 @@
+GET http://localhost:3001
+### 
+GET http://localhost:3001/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQwMDc0MjIsImV4cCI6MTYzNDAxMTAyMn0.mzlTyiSzSqz8fwjpMaL8HjzKztCalHZnyInlTbWJrkk
+
+###
+POST  http://localhost:3001/user/register
+Content-Type: application/json
+
+{
+    "email": "test4@gmail.com",
+    "name" : "test4",
+    "role" : "ADMIN",
+    "password": "a123456"
+}
+
+###
+POST  http://localhost:3001/user/login
+Content-Type: application/json
+
+{
+    "email": "test4@gmail.com",
+    "password": "a123456"
+}
+###
+POST http://localhost:3001/user/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJpYXQiOjE2MzQwMDc1NjQsImV4cCI6MTYzNDAxNDc2NH0.r5obSbxeD6JSpt9xMbe542-SI2mEkBrDsSeVKe17I0c"
+}
+
+###
+POST http://localhost:3001/user/logout
+Content-Type: application/json
+
+{
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJpYXQiOjE2MzQwMDc1NjQsImV4cCI6MTYzNDAxNDc2NH0.r5obSbxeD6JSpt9xMbe542-SI2mEkBrDsSeVKe17I0c"
+}
