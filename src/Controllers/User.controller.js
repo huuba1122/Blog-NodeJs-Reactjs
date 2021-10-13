@@ -1,109 +1,80 @@
 const User = require('../Models/User.model');
 const createError = require('http-errors');
-const { emailValidate } = require('../helpers/validation');
-const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt_service');
-const clientRedis = require('../configs/db/connections_redis');
+const { emailValidate, userValidate } = require('../helpers/validation');
+// const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt_service');
+// const clientRedis = require('../configs/db/connections_redis');
+const fileGoogle = require('../helpers/google_api');
+const fs = require('fs');
 
 const UserController = {
-    login: async (req, res, next) => {
+    getById:  async (req, res, next) => {
+
         try {
-            const {email, password } = req.body;
-            const { error } = emailValidate(email);
-            if(error) throw createError(error.details[0].message);
-            const user = await User.findOne({
-                email
-            });
-            if(!user) throw createError.NotFound('User not registered');
-            if(!password) throw createError('Enter your password!!');
-            
-            const isValid = await user.checkPassword(password);
-            if(!isValid) throw createError.Unauthorized();
-            const accessToken = await signAccessToken(user._id, user.role);
-            const refreshToken = await signRefreshToken(user._id);
+            const user = await User.findOne({_id: req.params.id}).select('-password');
+            if(!user) throw createError.NotFound('User have not registered');
             return res.json({
                 status: 'success',
-                accessToken,
-                refreshToken,
-                user
-            });
-        } catch (error) {
-            next(error);
-        }
-    },
-
-    register: async (req, res, next) => {
-        try {
-            const {email , name, password, role } = req.body;
-            const { error } = emailValidate(email);
-            if(error) throw createError(error.details[0].message);
-            const isExits = await User.findOne({
-                email
-            });     
-
-            if(isExits) throw createError.Conflict(`${email} is ready been register!`);
-
-            const user = new User({
-                email,
-                role,
-                name,
-                password
-            });
-
-            const saveUser = await user.save();
-
-            return res.json({
-                status: 'success',
-                user  : saveUser
+                data: {user}
             })
-
         } catch (error) {
             next(error);
         }
     },
-
     getAll:  async (req, res, next) => {
 
         try {
-            const users = await User.find({});
+            const users = await User.find({}).select('-password');
+            if(!users) throw createError.NotFound('User have not registered');
             return res.json({
                 status: 'success',
-                users : users
-            })
-
-        } catch (error) {
-            next(error);
-        }
-    },
-    logout: async (req, res, next) => {
-        try {
-            const { refreshToken } = req.body;
-            if(!refreshToken) throw createError.BadRequest();
-            const {userId} = await verifyRefreshToken(refreshToken);
-            clientRedis.del(userId.toString(), (err, reply) => {
-                if(err) throw createError.InternalServerError();
-                res.json({
-                    status: 'success'
-                })
+                data: {users}
             })
         } catch (error) {
             next(error);
         }
     },
 
-    refreshToken:  async (req, res, next) => {
+    update:  async (req, res, next) => {
         try {
-            const { refreshToken } = req.body;
-            if(!refreshToken) throw createError.BadRequest();
-            const {userId} = await verifyRefreshToken(refreshToken);
-            const user = await User.findOne({
-                _id: userId
-            });
-            if(!user) throw createError.NotFound('User not registered');
-            const accessToken = await signAccessToken(user._id, user.role);
-            const newRefreshToken = await signRefreshToken(user._id);
+            const {email} = req.body;
+            const { userId } = req.payload;
+            if(!req.params.id || req.params.id !== userId) throw createError.Unauthorized('Wrong user info!');
+            if(email){
+                const { error } = emailValidate(email);
+                if(error) throw createError(error.details[0].message);
+                const isExit = await User.findOne({_id : {$ne: userId}, email: email});
+                console.log(isExit);
+                if(isExit) throw createError.Conflict(`${email} is ready been register!`);
+            }
+            const user = await User.findOneAndUpdate({_id: userId}, req.body, {new: true}).select('-password');
             res.json({
-                accessToken,
-                refreshToken: newRefreshToken
+                status: 'success',
+                data: {user}
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    updateAvatar:  async (req, res, next) => {
+        try {
+            const fileName = req.file.filename;
+            const mimeType = req.file.mimetype;
+
+            const googleFile = await fileGoogle.upload(fileName, mimeType);
+            // console.log(googleFile);
+            if(!googleFile || !googleFile.linkView) throw createError.InternalServerError();
+            const user = await User.findOneAndUpdate(
+                {_id: req.params.id},
+                {avatarId: googleFile.id, avatarViewLink: googleFile.linkView}, 
+                {new: true}
+                );
+            fs.unlink(req.file.path, (err) => {
+                if(err) console.log(err);
+            });
+            res.json({
+                status: 'success',
+                data: {avatarFile: googleFile}
             })
         } catch (error) {
             next(error);

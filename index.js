@@ -11,7 +11,7 @@ require('dotenv').config();
 //connect db
 db.connect();
 //connect redis;
-require('./src/configs/db/connections_redis');
+// require('./src/configs/db/connections_redis');
 
 // http logs
 app.use(morgan('combined'));

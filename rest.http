@@ -1,39 +1,56 @@
 GET http://localhost:3001
 ### 
 GET http://localhost:3001/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQwMDc0MjIsImV4cCI6MTYzNDAxMTAyMn0.mzlTyiSzSqz8fwjpMaL8HjzKztCalHZnyInlTbWJrkk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQxMTQ0NDQsImV4cCI6MTYzNDExNDQ0NH0.23bNhim2MlPe02RtV3lAGaVZddB23AU4Op1VreqNqXs
 
 ###
-POST  http://localhost:3001/user/register
+POST  http://localhost:3001/register
 Content-Type: application/json
 
-{
-    "email": "test4@gmail.com",
-    "name" : "test4",
-    "role" : "ADMIN",
-    "password": "a123456"
-}
-
-###
-POST  http://localhost:3001/user/login
-Content-Type: application/json
-
-{
+{   
+    "name": "test4",
     "email": "test4@gmail.com",
     "password": "a123456"
 }
+
 ###
-POST http://localhost:3001/user/refresh-token
+POST  http://localhost:3001/login
 Content-Type: application/json
 
 {
-    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJpYXQiOjE2MzQwMDc1NjQsImV4cCI6MTYzNDAxNDc2NH0.r5obSbxeD6JSpt9xMbe542-SI2mEkBrDsSeVKe17I0c"
+    "email": "test2@gmail.com",
+    "password": "a123456"
 }
-
 ###
-POST http://localhost:3001/user/logout
+POST http://localhost:3001/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY0MGQ2Zjk3YzJmZThhZDJkMjgxMGYiLCJpYXQiOjE2MzQwMDc1NjQsImV4cCI6MTYzNDAxNDc2NH0.r5obSbxeD6JSpt9xMbe542-SI2mEkBrDsSeVKe17I0c"
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2ZTIzYTAzYzNmYTI0ODY5OTM2OGQiLCJpYXQiOjE2MzQxMzY0ODAsImV4cCI6MTYzNDE2NTI4MH0.IGXW-9cwFrR6b3DCNuNgA3wsAaWrC3GEyYQ2CQzDtNM"
 }
+
+###
+POST http://localhost:3001/logout
+Content-Type: application/json
+
+{
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2ZTIzYTAzYzNmYTI0ODY5OTM2OGQiLCJpYXQiOjE2MzQxMzYyMjIsImV4cCI6MTYzNDE2NTAyMn0.5VyDqkHP4rlOuOdrPhAjtPfAEWqDeomhXgRWaM1pacc"
+}
+
+####
+post http://localhost:3001/user/update-avatar/6166ad40ab3b13fb07d9f92b
+
+
+####
+PUT http://localhost:3001/user/6166e23a03c3fa248699368d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2ZTIzYTAzYzNmYTI0ODY5OTM2OGQiLCJyb2xlIjoiR1VFU1QiLCJpYXQiOjE2MzQxMzc5MzksImV4cCI6MTYzNDE0MTUzOX0.Of7l2r4ZWvxlp_2RFS-tIXryyeIJ06fEG_PeyAniyMY
+
+{
+    "name" : "Mr.Pink",
+    "website": "http://localhost:3001/blog/nodejs-reactjs"
+}
+
+
+####
+get http://localhost:3001/user/6166ad40ab3b13fb07d9f92b

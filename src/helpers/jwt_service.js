@@ -1,6 +1,6 @@
 const createHttpError = require('http-errors');
 const JWT = require('jsonwebtoken');
-const clientRedis = require('../configs/db/connections_redis');
+// const clientRedis = require('../configs/db/connections_redis');
 require('dotenv').config();
 
 const signAccessToken = async (userId, role) => {
@@ -29,15 +29,11 @@ const signRefreshToken = async (userId) => {
 
         const secretKey = process.env.REFRESH_TOKEN_SECRET;
         const options = {
-            expiresIn: "2h"
+            expiresIn: "8h"
         };
         JWT.sign(payload, secretKey, options, (err, token) => {
             if(err) reject(err);
-            clientRedis.set(userId.toString(), token, 'EX', 2*60*60, (err, reply) => {
-                if(err) reject(err);
-                console.log(`Call redis::${reply}`);
-                resolve(token);
-            })
+            resolve(token);
         });
     })
 };
@@ -64,14 +60,7 @@ const verifyRefreshToken = async (refreshToken) => {
     return new Promise( (resolve, reject) => {
         JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
             if(err) reject(err);
-
-            clientRedis.get(payload.userId, (err, reply) => {
-                if(err) reject(createHttpError.InternalServerError());
-                if(refreshToken === reply){
-                    resolve(payload);
-                }
-                reject(createHttpError.Unauthorized());
-            })
+            resolve(payload);
         });
     });
 };

@@ -7,9 +7,7 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
     name: {
         type: String,
-        lowercase: true,
-        unique: true,
-        require: true,
+        required: true,
         max: 100,
         trim: true
     },
@@ -18,15 +16,24 @@ const UserSchema = new Schema({
         trim: true,
         lowercase: true,
         unique: true,
-        require: true
+        required: true
     },
     password: {
         type: String,
-        require: true,
+        required: true
     },
     role: {
         type: String,
         default: 'GUEST'
+    },
+    avatarId: {
+        type: String,
+    },
+    avatarViewLink:{
+        type: String,
+    },
+    website:{
+        type: String,
     }
 },{
     timestamps: true
