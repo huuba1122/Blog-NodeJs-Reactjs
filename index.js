@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const httpError = require('http-errors');
 const morgan = require('morgan');
 const path = require('path');
@@ -6,6 +7,7 @@ const router = require('./src/Routers/Index.router');
 const db = require('./src/configs/db/connections_mongdb');
 
 const app = express();
+app.use(cors())
 // env
 require('dotenv').config();
 //connect db
