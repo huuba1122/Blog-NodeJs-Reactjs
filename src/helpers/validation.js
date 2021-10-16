@@ -23,12 +23,9 @@ const postValidate = post => {
         title: Joi.string().required(),
         linkImgCap: Joi.string(),
         content: Joi.string().required(),
-        imgPostId: Joi.array(),
+        // imgPostId: Joi.array(),
         tagId: Joi.array(),
-        topic: Joi.string(),
-        userId: Joi.string().required(),
-        view: Joi.number(),
-        reaction: Joi.number(),
+        topicId: Joi.string()
     });
 
     return PostSchema.validate(post);
@@ -37,9 +34,7 @@ const postValidate = post => {
 const commentValidate = comment => {
     const CommentSchema = Joi.object ({
         content: Joi.string().required(),
-        userId: Joi.string().required(),
-        postId: Joi.string().required(),
-        reply: Joi.array()
+        post: Joi.string().required()
     });
 
     return CommentSchema.validate(comment);

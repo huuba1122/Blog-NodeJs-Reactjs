@@ -9,7 +9,7 @@ const UserController = require('../Controllers/User.controller');
 
 router.post('/update-avatar/:id',verifyAccessToken, uploadMulter.single('avatar'), UserController.updateAvatar);
 router.put('/:id',verifyAccessToken, UserController.update);
-router.get('/:id',verifyAccessToken, UserController.getById);
+router.get('/:id', UserController.getById);
 router.get('/', verifyAccessToken, authPage(['ADMIN']), UserController.getAll);
 
 module.exports = router;

@@ -8,9 +8,10 @@ POST  http://localhost:3001/register
 Content-Type: application/json
 
 {   
-    "name": "test4",
-    "email": "test4@gmail.com",
-    "password": "a123456"
+    "name": "test5",
+    "email": "test5@gmail.com",
+    "password": "a123456",
+    "role" : "ADMIN"
 }
 
 ###
@@ -18,7 +19,7 @@ POST  http://localhost:3001/login
 Content-Type: application/json
 
 {
-    "email": "test2@gmail.com",
+    "email": "test5@gmail.com",
     "password": "a123456"
 }
 ###
@@ -26,7 +27,7 @@ POST http://localhost:3001/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2ZTIzYTAzYzNmYTI0ODY5OTM2OGQiLCJpYXQiOjE2MzQxMzY0ODAsImV4cCI6MTYzNDE2NTI4MH0.IGXW-9cwFrR6b3DCNuNgA3wsAaWrC3GEyYQ2CQzDtNM"
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM4MTYwOX0.z4UzKuv5_k6t_g_hWudCkVhzqo3xXqAp1Ej7MAtKjlI"
 }
 
 ###
@@ -34,7 +35,7 @@ POST http://localhost:3001/logout
 Content-Type: application/json
 
 {
-    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2ZTIzYTAzYzNmYTI0ODY5OTM2OGQiLCJpYXQiOjE2MzQxMzYyMjIsImV4cCI6MTYzNDE2NTAyMn0.5VyDqkHP4rlOuOdrPhAjtPfAEWqDeomhXgRWaM1pacc"
+    "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJpYXQiOjE2MzQyODc0NzMsImV4cCI6MTYzNDMxNjI3M30.mcCOmZZ2stt4GQgRLIB8uPiNS9UjdtWwo5tKP05WIC8"
 }
 
 ####
@@ -53,4 +54,134 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2Z
 
 
 ####
-get http://localhost:3001/user/6166ad40ab3b13fb07d9f92b
+GET  http://localhost:3001/user/6168ef6dc779fa1d11aafd61
+
+
+// Tag api
+####
+POST http://localhost:3001/tag
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "tags" : [
+        {"name" : "#PHP"},
+        {"name" : "#Java"},
+        {"name" : "#Python"}
+    ]
+}
+
+####
+GET http://localhost:3001/tag
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+####
+DELETE  http://localhost:3001/tag/6168f33860f93c4ef478c670
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+// ============================//
+
+// Topic api
+
+####
+POST http://localhost:3001/topic
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "topics" : [
+        {"name" : "test"}
+    ]
+}
+
+####
+GET http://localhost:3001/topic?page=1&linit=1&sort=quantityComment&s_type=asc
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQyNzQ3MzYsImV4cCI6MTYzNDI3ODMzNn0.dT_7g5wB3sDIlhMt-h_qXxkcspv1UpUotAxN3Hs42vQ
+
+
+####
+DELETE  http://localhost:3001/topic/6168fede2c2ec77548e2e917
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+
+// ============================//
+
+// Post api
+
+####
+POST http://localhost:3001/post
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "title" : "Hàm Ruby - khai báo hàm",
+    "linkImgCap" : "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage-us.24h.com.vn%2Fupload%2F3-2020%2Fimages%2F2020-09-18%2Ffaar-1600415791-488-width640height480.jpg&imgrefurl=https%3A%2F%2Fwww.24h.com.vn%2Fbong-da%2Ftorres-to-liverpool-coi-minh-la-vat-te-than-khoe-the-hinh-cuc-vam-vo-c48a1183579.html&tbnid=X97iOC5_JlW0zM&vet=12ahUKEwjn-euyyMvzAhXBzYsBHeENCUcQMygPegUIARDpAQ..i&docid=2fdCERIY1_hfBM&w=640&h=480&q=fernando%20torres&ved=2ahUKEwjn-euyyMvzAhXBzYsBHeENCUcQMygPegUIARDpAQ",
+    "content" : "Cú pháp khai báo hàm trong javascriptMột hàm JavaScript được định nghĩa bằng từ khóa function, theo sau là tên hàm, theo sau là dấu ngoặc đơn.Dấu ngoặc đơn có thể bao gồm tên tham số được phân tách bằng dấu phẩy.Tên hàm có thể chứa các chữ cái, chữ số, dấu gạch dưới và dấu đô la (quy tắc giống như các biến). ",
+    "tagId" : ["6168f98e5488eb97e8af51c2"],
+    "topicId" : "6168fea32c2ec77548e2e90f"
+}
+
+####
+PUT  http://localhost:3001/post/61693fc1e73746c395bb45c9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "title" : "Cú pháp khai báo hàm trong javascriptMột hàm JavaScript được định nghĩa bằng từ khóa function",
+    "linkImgCap" : "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage-us.24h.com.vn%2Fupload%2F3-2020%2Fimages%2F2020-09-18%2Ffaar-1600415791-488-width640height480.jpg&imgrefurl=https%3A%2F%2Fwww.24h.com.vn%2Fbong-da%2Ftorres-to-liverpool-coi-minh-la-vat-te-than-khoe-the-hinh-cuc-vam-vo-c48a1183579.html&tbnid=X97iOC5_JlW0zM&vet=12ahUKEwjn-euyyMvzAhXBzYsBHeENCUcQMygPegUIARDpAQ..i&docid=2fdCERIY1_hfBM&w=640&h=480&q=fernando%20torres&ved=2ahUKEwjn-euyyMvzAhXBzYsBHeENCUcQMygPegUIARDpAQ",
+    "content" : "Cú pháp khai báo hàm trong javascriptMột hàm JavaScript được định nghĩa bằng từ khóa function, theo sau là tên hàm, theo sau là dấu ngoặc đơn.Dấu ngoặc đơn có thể bao gồm tên tham số được phân tách bằng dấu phẩy.Tên hàm có thể chứa các chữ cái, chữ số, dấu gạch dưới và dấu đô la (quy tắc giống như các biến). ",
+    "tagId" : ["6168f98e5488eb97e8af51c3"],
+    "topicId" : "6168fea32c2ec77548e2e90f"
+}
+
+
+####
+GET http://localhost:3001/post?page=1&limit=10&sort=quantityComment&s_type=desc&_field=tagId&f_value=6168f98e5488eb97e8af51c2&q=ruby
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+
+####
+DELETE  http://localhost:3001/post/616930fb96a6bf20cd36b6d2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+// ============================//
+
+// comment api
+
+####
+POST http://localhost:3001/comment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "content" : "comment 2",
+    "post": "616a2b7c8ede27a1e3efd3a7"
+}
+
+####
+PUT  http://localhost:3001/comment?id=616a2dbcf75434116654cf4e&type=reply&action=add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+{
+    "content" : "reply 2"
+}
+
+
+####
+GET http://localhost:3001/comment?page=1&limit=10&post_id=61693fc1e73746c395bb45c9
+Content-Type: application/json
+
+
+####
+DELETE  http://localhost:3001/comment/616946995dc7b867a85dd519
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY4ZWY2ZGM3NzlmYTFkMTFhYWZkNjEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2MzQzNTI4MDksImV4cCI6MTYzNDM1NjQwOX0.Sa-UyBMJzG0UKP7eHTpzag4gm5wrXXqt76xObZT3i-U
+
+

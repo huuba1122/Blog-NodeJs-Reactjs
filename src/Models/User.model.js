@@ -28,12 +28,15 @@ const UserSchema = new Schema({
     },
     avatarId: {
         type: String,
+        default: ''
     },
     avatarViewLink:{
         type: String,
+        default: ''
     },
     website:{
         type: String,
+        default: ''
     }
 },{
     timestamps: true

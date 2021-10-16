@@ -32,7 +32,6 @@ const UserController = {
                     refreshToken,
                 });
             }
-
             const saveUserRefreshToken = await userRefreshToken.save();
             // console.log('token:::',saveUserRefreshToken);
             return res.json({
@@ -54,23 +53,19 @@ const UserController = {
             const isExits = await User.findOne({
                 email
             });     
-
             if(isExits) throw createError.Conflict(`${email} is ready been register!`);
-
             const user = new User({
                 email,
                 role,
                 name,
                 password
             });
-
             const saveUser = await user.save();
 
             return res.json({
                 status: 'success',
                 userId  : saveUser._id
             })
-
         } catch (error) {
             next(error);
         }
@@ -103,7 +98,7 @@ const UserController = {
             let userRefreshToken = await RefreshTokenModel.findOne({
                 userId
             });
-            console.log(userRefreshToken);
+            // console.log(userRefreshToken);
             if(!userRefreshToken || refreshToken !== userRefreshToken.refreshToken) throw createError.Unauthorized();
             const accessToken = await signAccessToken(user._id, user.role);
             const newRefreshToken = await signRefreshToken(user._id);

@@ -43,7 +43,7 @@ const UserController = {
                 const { error } = emailValidate(email);
                 if(error) throw createError(error.details[0].message);
                 const isExit = await User.findOne({_id : {$ne: userId}, email: email});
-                console.log(isExit);
+                // console.log(isExit);
                 if(isExit) throw createError.Conflict(`${email} is ready been register!`);
             }
             const user = await User.findOneAndUpdate({_id: userId}, req.body, {new: true}).select('-password');
